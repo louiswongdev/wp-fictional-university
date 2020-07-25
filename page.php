@@ -40,7 +40,7 @@
 
       // only display sidebar menu links if current page has a parent page
       // or is a parent 
-      if (1 < 2) { ?>      
+      if ($theParent or $hasChildren) { ?>      
         <div class="page-links">
           <h2 class="page-links__title">
             <a href="<?php echo get_permalink($theParent); ?>"><?php echo get_the_title($theParent); ?></a>
