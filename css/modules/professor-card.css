@@ -22,6 +22,8 @@
   &__image {
     display: block;
     transition: opacity .3s ease-out, transform .3s ease-out;
+    /* height: 150px;
+    width: auto; */
   }
 
   &:hover &__image {
