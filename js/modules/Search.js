@@ -57,7 +57,6 @@ class Search {
     ).then(
       (posts, pages) => {
         let combinedResults = [...posts[0], ...pages[0]];
-        console.log(combinedResults);
         this.resultsDiv.html(`
         <h2 class="search-overlay__section-title">General Information</h2>
         ${
@@ -68,7 +67,9 @@ class Search {
           ${combinedResults
             .map(
               item =>
-                `<li><a href="${item.link}">${item.title.rendered}</a></li>`,
+                `<li><a href="${item.link}">${item.title.rendered}</a> ${
+                  item.type == 'post' ? `by ${item.authorName}` : ''
+                }</li>`,
             )
             .join('')}
           ${combinedResults.length ? '</ul>' : ''}
