@@ -4,6 +4,7 @@ class Search {
   // 1. describe and create/initiate our object
   constructor() {
     this.addSearchHTML();
+    this.bodyClass = document.querySelector('body');
     this.resultsDiv = document.querySelector('#search-overlay__results');
     this.openButton = document.querySelectorAll('.js-search-trigger');
     this.closeButton = document.querySelector('.search-overlay__close');
@@ -172,14 +173,16 @@ class Search {
     }
   }
 
-  openOverlay() {
+  openOverlay(e) {
+    // e.preventDefault();
+    this.bodyClass.classList.remove('preload');
     this.searchOverlay.classList.add('search-overlay--active');
     document.body.classList.add('body-no-scroll');
     this.searchField.value = '';
     setTimeout(() => this.searchField.focus(), 301);
     console.log('our open method just ran!');
     this.isOverlayOpen = true;
-    return false;
+    // return false;
   }
 
   closeOverlay() {
