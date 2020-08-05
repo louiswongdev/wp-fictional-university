@@ -139,6 +139,7 @@
       // remove duplicates
       $results['professors'] = array_unique($results['professors'], SORT_REGULAR);
       $results['events'] = array_unique($results['events'], SORT_REGULAR);
+      $results['campuses'] = array_unique($results['campuses'], SORT_REGULAR);
     }
 
     return $results;
