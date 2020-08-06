@@ -51,9 +51,9 @@
     if (strstr($_SERVER['SERVER_NAME'], 'fictional-university.local')) {
       wp_enqueue_script('main-university-js', 'http://localhost:3000/bundled.js', NULL, '1.0', true);
     } else {
-      wp_enqueue_script('our-vendors-js', get_theme_file_uri('/bundled-assets/vendors~scripts.9678b4003190d41dd438.js'), NULL, '1.0', true);
-      wp_enqueue_script('main-university-js', get_theme_file_uri('/bundled-assets/scripts.f970537116009f070bf1.js'), NULL, '1.0', true);
-      wp_enqueue_style('our-main-styles', get_theme_file_uri('/bundled-assets/styles.f970537116009f070bf1.css'));
+      wp_enqueue_script('our-vendors-js', get_theme_file_uri('/bundled-assets/vendors~scripts.7d054c267a52fa2373d3.js'), NULL, '1.0', true);
+      wp_enqueue_script('main-university-js', get_theme_file_uri('/bundled-assets/scripts.4ad7d9943bc00b3fb124.js'), NULL, '1.0', true);
+      wp_enqueue_style('our-main-styles', get_theme_file_uri('/bundled-assets/styles.4ad7d9943bc00b3fb124.css'));
     }
 
     wp_localize_script( 'main-university-js', 'universityData', array(
@@ -109,3 +109,41 @@
     return $api;
   }
   add_filter('acf/fields/google_map/api', 'universityMapKey');
+
+  // Redirect subscriber accounts out of admin and onto homepage
+  function redirectSubsToFrontend() {
+    $ourCurrentUser = wp_get_current_user();
+    if (count($ourCurrentUser->roles) == 1 AND $ourCurrentUser->roles[0] == 'subscriber') {
+      wp_redirect(site_url('/'));
+      exit;
+    }
+  }
+  add_action('admin_init', 'redirectSubsToFrontend');
+
+  // Remove admin bar for subscribers
+  function noSubsAdminBar() {
+    $ourCurrentUser = wp_get_current_user();
+    if (count($ourCurrentUser->roles) == 1 AND $ourCurrentUser->roles[0] == 'subscriber') {
+      show_admin_bar( false );
+    }
+  }
+  add_action('wp_loaded', 'noSubsAdminBar');
+
+  // Customize login screen
+  function ourHeaderUrl() {
+    return esc_url(site_url('/'));
+  }
+  add_filter('login_headerurl', 'ourHeaderUrl');
+
+  // Load custom CSS in admin
+  function ourLoginCSS() {
+    wp_enqueue_style('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    wp_enqueue_style('our-main-styles', get_theme_file_uri('/bundled-assets/styles.4ad7d9943bc00b3fb124.css'));
+  }
+  add_action('login_enqueue_scripts', 'ourLoginCSS');
+
+  // Change header title in login screen
+  function ourHeaderTitle() {
+    return get_option('blogname');
+  }
+  add_filter('login_headertitle', 'ourHeaderTitle');
