@@ -132,7 +132,7 @@
 }
 
 #my-notes li {
-  transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out; 
   opacity: 1;
 }
 
