@@ -1,6 +1,7 @@
 <?php
 
   require get_theme_file_path('/inc/search-route.php');
+  require get_theme_file_path('/inc/like-route.php');
 
   // Add custom properties to REST API response object
   function university_custom_rest() {
@@ -57,8 +58,8 @@
       wp_enqueue_script('main-university-js', 'http://localhost:3000/bundled.js', NULL, '1.0', true);
     } else {
       wp_enqueue_script('our-vendors-js', get_theme_file_uri('/bundled-assets/vendors~scripts.7d054c267a52fa2373d3.js'), NULL, '1.0', true);
-      wp_enqueue_script('main-university-js', get_theme_file_uri('/bundled-assets/scripts.dcf4142f86f702953b06.js'), NULL, '1.0', true);
-      wp_enqueue_style('our-main-styles', get_theme_file_uri('/bundled-assets/styles.dcf4142f86f702953b06.css'));
+      wp_enqueue_script('main-university-js', get_theme_file_uri('/bundled-assets/scripts.7a43f79352ac5de45d05.js'), NULL, '1.0', true);
+      wp_enqueue_style('our-main-styles', get_theme_file_uri('/bundled-assets/styles.7a43f79352ac5de45d05.css'));
     }
 
     wp_localize_script( 'main-university-js', 'universityData', array(
@@ -144,7 +145,7 @@
   // Load custom CSS in admin
   function ourLoginCSS() {
     wp_enqueue_style('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-    wp_enqueue_style('our-main-styles', get_theme_file_uri('/bundled-assets/styles.dcf4142f86f702953b06.css'));
+    wp_enqueue_style('our-main-styles', get_theme_file_uri('/bundled-assets/styles.7a43f79352ac5de45d05.css'));
   }
   add_action('login_enqueue_scripts', 'ourLoginCSS');
 
